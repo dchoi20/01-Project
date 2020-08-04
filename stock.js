@@ -29,7 +29,7 @@
 //--------- TODAYS DATE --------------------
 let today = new Date();
 
-let dd = today.getDate();
+let dd = today.getDate() - 1;
 let mm = today.getMonth() + 1;
 let yyyy = today.getFullYear();
 // console.log(mm);
@@ -85,8 +85,32 @@ $("#stockInfo").on("click", ".stockListItems", function () {
     $(`<p>${response["Meta Data"]["2. Symbol"]}</p>`).appendTo("#stockInfo");
     $(
       `<p>Open: $${parseInt(
-        response["Time Series (Daily)"]["2020-08-03"]["1. open"]
-      ).toFixed(2)}</p>`
+        response["Time Series (Daily)"][todayDate]["1. open"]
+      ).toFixed(2)}</p>
+      <p>High: $${parseInt(
+        response["Time Series (Daily)"][todayDate]["2. high"]
+      ).toFixed(2)}</p>
+      <p>Low: $${parseInt(
+        response["Time Series (Daily)"][todayDate]["3. low"]
+      ).toFixed(2)}</p>
+      <p>Previous Close: $${parseInt(
+        response["Time Series (Daily)"][todayDate]["4. close"]
+      ).toFixed(2)}</p>
+      <p>Volume: $${parseInt(
+        response["Time Series (Daily)"][todayDate]["5. volume"]
+      ).toFixed()}</p>`
     ).appendTo("#stockInfo");
   });
 });
+
+// function companyOverview() {
+//   let query =
+//     "https://www.alphavantage.co/query?function=OVERVIEW&symbol=" +
+//     IBM +
+//     "&apikey=AIOFXIT69F29K1ID";
+
+//   $.ajax({
+//     url: queryURL,
+//     method: "GET",
+//   }).then(function (response) {});
+// }
