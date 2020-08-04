@@ -72,8 +72,6 @@ $("#stockInputBtn").on("click", searchSymbol);
 $("#stockInfo").on("click", ".stockListItems", function () {
   let stockSelected = $(this).attr("data-symbol").toLowerCase();
 
-  window.location.href = "./stock.html";
-
   let queryURL =
     "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" +
     stockSelected +
