@@ -1,6 +1,22 @@
 h1 {
     color: white;
 }
+
+button {
+    color: white !important;
+}
+
+
+.uk-container {
+    text-align: center;
+
+}
+
+/* .content {
+    text-align: center;
+    display: inline-block;
+} */
+
 .stockListItems:hover {
   cursor: pointer;
 }
