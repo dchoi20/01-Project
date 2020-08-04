@@ -15,6 +15,9 @@ function stockSearch() {
   }).then(function (response) {
     console.log(response);
     $(`<p>${response["Meta Data"]["2. Symbol"]}</p>`).appendTo("#stockInfo");
+    // $(
+    //   `<p>${response["Time Series (Daily)"][todayDate]["1. open"]}</p>`
+    // ).appendTo("#stockInfo");
   });
 }
 
@@ -25,6 +28,7 @@ $("#stockInputBtn").on("click", function () {
 
 //--------- TODAYS DATE --------------------
 let today = new Date();
+
 let dd = today.getDate();
 let mm = today.getMonth() + 1;
 let yyyy = today.getFullYear();
@@ -51,7 +55,11 @@ function searchSymbol() {
     url: queryURL,
     method: "GET",
   }).then(function (response) {
-    console.log(response.bestMatches.length);
+    console.log(response.bestMatches);
+    for (let i = 0; i < response.bestMatches.length; i++) {
+      $(`<p>${response.bestMatches[i]["2. name"]}</p>`).appendTo("#stockInfo");
+    }
+    //   $(`<p>${response["Meta Data"]["2. Symbol"]}</p>`).appendTo("#stockInfo");
   });
 }
 
