@@ -8,14 +8,30 @@ button {
 
 
 .uk-container {
+    margin: 0;
+    padding: 150px;
+    width: 75%;
     text-align: center;
 
 }
 
-/* .content {
-    text-align: center;
-    display: inline-block;
-} */
+.uk-card {
+    background-color: gray;
+}
+
+.uk-card-title {
+    color: black;
+}
+
+p {
+    color: black;
+}
+
+button a {
+    color: black;
+}
+
+
 
 .stockListItems:hover {
   cursor: pointer;
