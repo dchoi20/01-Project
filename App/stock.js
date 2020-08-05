@@ -28,6 +28,7 @@ $.ajax({
             2
           )}</p>
           <p>Volume: $${parseInt(yesterdayInfo["5. volume"]).toFixed()}</p>
+          <button id="companyOverviewBtn" class="uk-button uk-button-default">Company Overview</button>
       </div>`).appendTo("#stockInfo");
 });
 
@@ -58,3 +59,9 @@ $.ajax({
 function renderStockPage(stockSelected) {
   window.location.href = `./stock.html?stock=${stockSelected}`;
 }
+
+$("#stockInfo").on("click", "#companyOverviewBtn", function () {
+  // companyOverview();
+
+  window.location.href = `./companyOverview.html?stock=${stockSelected}`;
+});
