@@ -19,6 +19,7 @@ $.ajax({
                     <p>Published: ${article.published}</p>
                     <a target="_blank" href="${article.url}">Click to Read</a> 
                 </div>
-            </div>`).appendTo(".uk-container")
+            </div>
+            <hr class="uk-divider-icon">`).appendTo(".uk-container")
     };
 });

@@ -1,4 +1,4 @@
-let apiKey = "AIOFXIT69F29K1ID"
+let apiKey = "AIOFXIT69F29K1ID";
 
 //--------- TODAYS DATE --------------------
 let today = new Date();
@@ -39,5 +39,5 @@ $("#searchResults").on("click", ".stockListItems", function () {
 });
 
 function renderStockPage(stockSelected) {
-  window.location.href = `./stock.html?stock=${stockSelected}`;
-};
+  window.location.href = `./stock.html?company=${stockSelected}`;
+}
