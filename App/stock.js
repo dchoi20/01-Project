@@ -64,7 +64,3 @@ $.ajax({
     </div>`).appendTo("#stockNews");
   }
 });
-
-function renderStockPage(stockSelected) {
-  window.location.href = `./stock.html?stock=${stockSelected}`;
-}
