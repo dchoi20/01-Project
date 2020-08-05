@@ -24,8 +24,9 @@ function searchSymbol() {
     console.log(response.bestMatches);
     for (let i = 0; i < response.bestMatches.length; i++) {
       let stockBestMatches = response.bestMatches[i];
+      let companyName = stockBestMatches["2. name"];
       $(
-        `<p class="stockListItems" data-symbol="${stockBestMatches["1. symbol"]}">${stockBestMatches["2. name"]}</p>`
+        `<p class="stockListItems" data-name="${companyName}"data-symbol="${stockBestMatches["1. symbol"]}">${companyName}</p>`
       ).appendTo("#searchResults");
     }
   });
@@ -35,9 +36,10 @@ $("#stockInputBtn").on("click", searchSymbol);
 
 $("#searchResults").on("click", ".stockListItems", function () {
   let stockSelected = $(this).attr("data-symbol");
-  renderStockPage(stockSelected);
+  let companyName = $(this).attr("data-name");
+  renderStockPage(stockSelected, companyName);
 });
 
-function renderStockPage(stockSelected) {
-  window.location.href = `./stock.html?stock=${stockSelected}`;
+function renderStockPage(stockSelected, companyName) {
+  window.location.href = `./stock.html?stock=${stockSelected}&company=${companyName}`;
 };
