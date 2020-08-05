@@ -1,11 +1,6 @@
 let $dateSelected = $("#dateSelected");
 let $dateBtn = $("#dateBtn");
 
-$dateBtn.on("click", function () {
-  let selectedDate = $dateSelected.val();
-  console.log(selectedDate);
-});
-
 params = new URL(document.location).searchParams;
 stockSelected = params.get("stock");
 
@@ -60,7 +55,7 @@ function companyOverview() {
     $(
       `<div class="uk-card uk-card-default uk-margin">
       <div class="uk-card-header">
-        <h3 class="uk-card-title">${response["Symbol"]}(${response["Name"]})</h3>
+        <h3 class="uk-card-title">${response["Name"]} (${response["Symbol"]})</h3>
       
       </div>
       <div class="uk-card-body">
