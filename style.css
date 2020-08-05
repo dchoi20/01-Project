@@ -1,21 +1,33 @@
 h1 {
-    color: white;
+  color: white;
 }
 
 button {
-    color: white !important;
+  color: white !important;
 }
-
 
 .uk-container {
-    text-align: center;
-
+  margin: 0;
+  padding: 150px;
+  width: 75%;
+  text-align: center;
 }
 
-/* .content {
-    text-align: center;
-    display: inline-block;
-} */
+.uk-card {
+  background-color: gray;
+}
+
+.uk-card-title {
+  color: black;
+}
+
+p {
+  color: black;
+}
+
+button a {
+  color: black;
+}
 
 .stockListItems:hover {
   cursor: pointer;

@@ -45,7 +45,7 @@ let newsQueryUrl = `https://finnhub.io/api/v1/company-news?symbol=${stockSelecte
 
 $.ajax({
   url: newsQueryUrl,
-  method: "GET"
+  method: "GET",
 }).then(function (response) {
   console.log(newsQueryUrl)
   console.log(response);
@@ -61,9 +61,10 @@ $.ajax({
     <p>Published: ${article.datetime}</p>
     <a target="_blank" href="${article.url}">Click to Read</a> 
     </div>
-    </div>`).appendTo("#stockNews")
-  };
+    </div>`).appendTo("#stockNews");
+  }
 });
 
-  
-  
+function renderStockPage(stockSelected) {
+  window.location.href = `./stock.html?stock=${stockSelected}`;
+}

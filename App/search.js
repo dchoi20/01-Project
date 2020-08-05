@@ -1,4 +1,4 @@
-let apiKey = "AIOFXIT69F29K1ID"
+let apiKey = "AIOFXIT69F29K1ID";
 
 //--------- TODAYS DATE --------------------
 let today = new Date();
