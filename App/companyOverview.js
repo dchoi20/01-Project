@@ -6,40 +6,48 @@ $dateBtn.on("click", function () {
   console.log(selectedDate);
 });
 
-let stockSelected = window.location.search.split("=")[1];
+params = new URL(document.location).searchParams;
+stockSelected = params.get("stock");
 
-let today = new Date();
-let dd = today.getDate() - 1;
-let mm = today.getMonth() + 1;
-let yyyy = today.getFullYear();
-let yesterdayDate = yyyy + "-" + "0" + mm + "-" + "0" + dd;
+stockApiKey = "AIOFXIT69F29K1ID";
 
-let stockApiKey = "AIOFXIT69F29K1ID";
-let stockQueryUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${stockSelected}&apikey=${stockApiKey}`;
-
-function dailyStockInfo() {
+function companyDailyStockInfo() {
+  stockQueryUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${stockSelected}&apikey=${stockApiKey}`;
   $.ajax({
     url: stockQueryUrl,
     method: "GET",
   }).then(function (response) {
-    let dailyView = response["Time Series (Daily)"];
-    let yesterdayInfo = dailyView[yesterdayDate];
-    $(
-      `<div class="uk-card uk-card-default uk-margin">
+    // let lastRefreshed = response["Meta Data"]["3. Last Refreshed"]; // get latest date available
+    $dateBtn.on("click", function () {
+      console.log(response);
+      let selectedDate = $dateSelected.val();
+      console.log(selectedDate);
+      let dailyView = response["Time Series (Daily)"];
+
+      // let latestInfo = dailyView[lastRefreshed];
+      // console.log(lastestInfo);
+
+      $(
+        `<div class="uk-card uk-card-default uk-margin">
       
       <div class="uk-card-body">
-        <p>Open: $${parseInt(yesterdayInfo["1. open"]).toFixed(2)}</p>
-          <p>High: $${parseInt(yesterdayInfo["2. high"]).toFixed(2)}</p>
-          <p>Low: $${parseInt(yesterdayInfo["3. low"]).toFixed(2)}</p>
-          <p>Previous Close: $${parseInt(yesterdayInfo["4. close"]).toFixed(
-            2
-          )}</p>
-          <p>Volume: $${parseInt(yesterdayInfo["5. volume"]).toFixed()}</p>
+        <p>Open: $${parseInt(dailyView[selectedDate]["1. open"]).toFixed(2)}</p>
+          <p>High: $${parseInt(
+            dailyView[selectedDate]["2. high"]
+          ).toFixed()}</p>
+          <p>Low: $${parseInt(dailyView[selectedDate]["3. low"]).toFixed()}</p>
+          <p>Previous Close: $${parseInt(
+            dailyView[selectedDate]["4. close"]
+          ).toFixed()}</p>
+          <p>Volume: $${parseInt(
+            dailyView[selectedDate]["5. volume"]
+          ).toFixed()}</p>
       </div>`
-    ).appendTo("#dailyStockInfo");
+      ).appendTo("#companyDailyStockInfo");
+    });
   });
 }
-dailyStockInfo();
+companyDailyStockInfo();
 
 function companyOverview() {
   let stockQueryUrl = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${stockSelected}&apikey=AIOFXIT69F29K1ID`;
@@ -52,7 +60,8 @@ function companyOverview() {
     $(
       `<div class="uk-card uk-card-default uk-margin">
       <div class="uk-card-header">
-        <h3 class="uk-card-title">${response["Symbol"]}</h3>
+        <h3 class="uk-card-title">${response["Symbol"]}(${response["Name"]})</h3>
+      
       </div>
       <div class="uk-card-body">
         <p>${response["Description"]}</p>
@@ -62,3 +71,28 @@ function companyOverview() {
   });
 }
 companyOverview();
+
+function companyInfo() {
+  let stockQueryUrl = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${stockSelected}&apikey=AIOFXIT69F29K1ID`;
+
+  $.ajax({
+    url: stockQueryUrl,
+    method: "GET",
+  }).then(function (response) {
+    console.log(response);
+    $(
+      `<div class="uk-card uk-card-default uk-margin">
+      <div class="uk-card-body">
+        <p>Sector: ${response["Sector"]}</p>
+        <p>Industry: ${response["Industry"]}</p>
+        <p>Exchange: ${response["Exchange"]}</p>
+        <p>52 Week High: ${response["52WeekHigh"]}</p>
+        <p>52 Week Low: ${response["52WeekLow"]}</p>
+
+      </div>
+      `
+    ).appendTo("#companyInfo");
+  });
+}
+
+companyInfo();

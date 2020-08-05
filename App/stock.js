@@ -1,10 +1,9 @@
-let stockSelected = window.location.search.split("=")[1];
+let params = new URL(document.location).searchParams;
+let stockSelected = params.get("stock");
+let companyName = params.get("company");
 
-let today = new Date();
-let dd = today.getDate() - 1;
-let mm = today.getMonth() + 1;
-let yyyy = today.getFullYear();
-let yesterdayDate = yyyy + "-" + "0" + mm + "-" + "0" + dd;
+today = moment().format("YYYY-MM-DD");
+yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
 
 let stockApiKey = "AIOFXIT69F29K1ID";
 let stockQueryUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${stockSelected}&apikey=${stockApiKey}`;
@@ -14,54 +13,55 @@ $.ajax({
   method: "GET",
 }).then(function (response) {
   console.log(response);
+  let lastRefreshed = response["Meta Data"]["3. Last Refreshed"]; // get latest date available
   let dailyView = response["Time Series (Daily)"];
-  let yesterdayInfo = dailyView[yesterdayDate]; //get last day available in array
+  let latestInfo = dailyView[lastRefreshed];
+
   $(`<div class="uk-card uk-card-default uk-margin">
       <div class="uk-card-header">
-        <h3 class="uk-card-title">${response["Meta Data"]["2. Symbol"]}</h3>
+        <h3 class="uk-card-title">${companyName} (${stockSelected})</h3>
       </div>
       <div class="uk-card-body">
-        <p>Open: $${parseInt(yesterdayInfo["1. open"]).toFixed(2)}</p>
-          <p>High: $${parseInt(yesterdayInfo["2. high"]).toFixed(2)}</p>
-          <p>Low: $${parseInt(yesterdayInfo["3. low"]).toFixed(2)}</p>
-          <p>Previous Close: $${parseInt(yesterdayInfo["4. close"]).toFixed(
-            2
-          )}</p>
-          <p>Volume: $${parseInt(yesterdayInfo["5. volume"]).toFixed()}</p>
+        <p>Open: $${parseInt(latestInfo["1. open"]).toFixed(2)}</p>
+          <p>High: $${parseInt(latestInfo["2. high"]).toFixed(2)}</p>
+          <p>Low: $${parseInt(latestInfo["3. low"]).toFixed(2)}</p>
+          <p>Previous Close: $${parseInt(latestInfo["4. close"]).toFixed(2)}</p>
+          <p>Volume: $${parseInt(latestInfo["5. volume"]).toFixed()}</p>
           <button id="companyOverviewBtn" class="uk-button uk-button-default">Company Overview</button>
       </div>`).appendTo("#stockInfo");
 });
 
-let newsApiKey = "-WEIf8br859cG3nJvC1YU0KreUz80wPxADv8Xp8Z5DeQ5egI";
-let newsQueryUrl = `https://api.currentsapi.services/v1/search?keywords=${stockSelected}&apiKey=${newsApiKey}`;
+let newsApiKey = "bslccuvrh5rb8ivkrml0";
+let newsQueryUrl = `https://finnhub.io/api/v1/company-news?symbol=${stockSelected}&from=${yesterday}&to=${today}&token=${newsApiKey}`;
 
 $.ajax({
   url: newsQueryUrl,
   method: "GET",
 }).then(function (response) {
   console.log(newsQueryUrl);
-  for (let i = 0; i < response.news.length; i++) {
-    const article = response.news[i];
+  console.log(response);
+  for (let i = 0; i < response.length; i++) {
+    const article = response[i];
     $(`<div class="uk-card uk-card-default uk-margin">
     <div class="uk-card-header">
-    <h3 class="uk-card-title">${article.title}</h3>
+    <h3 class="uk-card-title">${article.headline}</h3>
     </div>
     <div class="uk-card-body">
-    <h4>${article.description}</h4>
-    <p>Source: ${article.author}</p>
-    <p>Published: ${article.published}</p>
+    <h4>${article.summary}</h4>
+    <p>Source: ${article.source}</p>
+    <p>Published: ${article.datetime}</p>
     <a target="_blank" href="${article.url}">Click to Read</a> 
     </div>
     </div>`).appendTo("#stockNews");
   }
 });
 
-function renderStockPage(stockSelected) {
-  window.location.href = `./stock.html?stock=${stockSelected}`;
-}
-
 $("#stockInfo").on("click", "#companyOverviewBtn", function () {
-  // companyOverview();
-
-  window.location.href = `./companyOverview.html?stock=${stockSelected}`;
+  // let stockSelected = $(this).attr("data-symbol");
+  // let companyName = $(this).attr("data-name");
+  renderCompanyOverview(stockSelected, companyName);
 });
+
+function renderCompanyOverview(stockSelected, companyName) {
+  window.location.href = `./companyOverview.html?stock=${stockSelected}&company=${companyName}`;
+}
