@@ -25,9 +25,11 @@ p {
   color: black;
 }
 
-button a {
-  color: black;
+.uk-button {
+    color: black;
+    background-color: white;
 }
+
 
 .stockListItems:hover {
   cursor: pointer;
