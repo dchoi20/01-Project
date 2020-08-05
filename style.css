@@ -1,15 +1,13 @@
 h1 {
-    color: white;
+  color: white;
 }
 
 button {
-    color: white !important;
+  color: white !important;
 }
 
-
 .uk-container {
-    text-align: center;
-
+  text-align: center;
 }
 
 /* .content {

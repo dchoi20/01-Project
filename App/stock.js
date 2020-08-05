@@ -17,7 +17,9 @@ $(document).ready(function () {
     method: "GET",
   }).then(function (response) {
     console.log(response);
-    $(`<p>${response["Meta Data"]["2. Symbol"]}</p>`).appendTo("#stockInfo");
+    $(`<p>Symbol: ${response["Meta Data"]["2. Symbol"]}</p>`).appendTo(
+      "#stockInfo"
+    );
     $(
       `<p>Open: $${parseInt(
         response["Time Series (Daily)"][todayDate]["1. open"]
@@ -38,3 +40,18 @@ $(document).ready(function () {
     ).appendTo("#stockInfo");
   });
 });
+
+function companyOverview() {
+  let stockSelected = window.location.search.split("=")[1].toLocaleLowerCase();
+  let queryUrl = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${stockSelected}&apikey=${apiKey}`;
+
+  $.ajax({
+    url: queryUrl,
+    method: "GET",
+  }).then(function (response) {
+    console.log(response.Description);
+    console.log(response["52WeekHigh"]);
+    console.log(response["52WeekLow"]);
+  });
+}
+companyOverview();
