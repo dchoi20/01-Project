@@ -1,37 +1,33 @@
 h1 {
-    color: white;
+  color: white;
 }
 
 button {
-    color: white !important;
+  color: white !important;
 }
 
-
 .uk-container {
-    margin: 0;
-    padding: 150px;
-    width: 75%;
-    text-align: center;
-
+  margin: 0;
+  padding: 150px;
+  width: 75%;
+  text-align: center;
 }
 
 .uk-card {
-    background-color: gray;
+  background-color: gray;
 }
 
 .uk-card-title {
-    color: black;
+  color: black;
 }
 
 p {
-    color: black;
+  color: black;
 }
 
 button a {
-    color: black;
+  color: black;
 }
-
-
 
 .stockListItems:hover {
   cursor: pointer;
