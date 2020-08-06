@@ -35,7 +35,7 @@ function companyDailyStockInfo() {
             dailyView[selectedDate]["5. volume"]
           ).toFixed()}</p>
       </div>`
-      ).appendTo("#companyDailyStockInfo");
+      ).prependTo("#companyDailyStockInfo");
     });
   });
 }
