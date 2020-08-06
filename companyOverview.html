@@ -13,17 +13,14 @@
     <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #transparent-sticky-navbar">
         <nav class="uk-navbar-container" uk-navbar>
             <div class="uk-navbar-right">
-
                 <ul class="uk-navbar-nav">
                     <li>
                         <a href="./index.html">Home</a>
                     </li>
-                    <li>
+                    <li class="uk-active">
                         <a href="./news.html">News</a>
                     </li>
-                    <li>
-                        <a href="./search.html">Search</a>
-                    </li>
+                    <li><a href="./search.html">Search</a></li>
                 </ul>
 
             </div>
@@ -37,20 +34,28 @@
             <div id="companyInfo"></div>
         </div>
         <div>
-            <header id="currentDate"></header>
+            <header id="currentDate">
+            </header>
             <div id="currentDateStockInfo"></div>
-            <h3>Select Date:</h3>
-            <form>
-                <input id="dateSelected" type="date">
-                <input id="dateBtn" type="button" value="date">
-            </form>
+
+            <div class="uk-card uk-card-default uk-margin">
+                <div class="uk-card-header">
+                    <h3>Select Date:</h3>
+                </div>
+                <div class="uk-card-body">
+                    <form>
+                        <input id="dateSelected" class="uk-input uk-form-width-medium" type="date">
+                        <button id="dateBtn" class="uk-button uk-button-default" type="button"
+                            value="date">date</button>
+                    </form>
+                </div>
+            </div>
             <div id="companyDailyStockInfo"></div>
         </div>
     </div>
 
 
 
-    </div>
 
 
 

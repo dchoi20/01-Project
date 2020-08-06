@@ -27,7 +27,7 @@ $.ajax({
           <p>Low: $${parseInt(latestInfo["3. low"]).toFixed(2)}</p>
           <p>Previous Close: $${parseInt(latestInfo["4. close"]).toFixed(2)}</p>
           <p>Volume: $${parseInt(latestInfo["5. volume"]).toLocaleString()}</p>
-          <button id="companyOverviewBtn" class="uk-button uk-button-default">Company Overview</button>
+          <button id="companyOverviewBtn" class="uk-button uk-button-primary uk-button-small">Company Overview</button>
       </div>`).appendTo("#stockInfo");
 });
 

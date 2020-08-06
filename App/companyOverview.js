@@ -39,7 +39,7 @@ function companyDailyStockInfo() {
           ).toFixed()}</p>
           <p>Volume: $${parseInt(
             dailyView[selectedDate]["5. volume"]
-          ).toFixed()}</p>
+          ).toLocaleString()}</p>
       </div>`
       ).prependTo("#companyDailyStockInfo");
     });
@@ -107,7 +107,9 @@ function currentDateInfo() {
     latestInfo = dailyView[lastRefreshed];
 
     $(`<div class="uk-card uk-card-default uk-margin">
-        <h4>${todayDate}</h4>
+    <div class="uk-card-header">
+        <h3 class="uk-card-title">Current Day Stock Watch:</h3>
+      </div>
         <div class="uk-card-body">
           <p>Open: $${parseInt(latestInfo["1. open"]).toFixed(2)}</p>
             <p>High: $${parseInt(latestInfo["2. high"]).toFixed(2)}</p>
