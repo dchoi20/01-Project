@@ -1,6 +1,6 @@
 # Birdie
 
-## Bird is an investment research app where you can browse general business news and search for specific stocks.
+## Birdie is an investment research app where you can browse general business news and search for specific stocks.
 
 ## [Visit the live site here!](https://dchoi20.github.io/Birdie/)
 ```
