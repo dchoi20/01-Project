@@ -12,20 +12,17 @@ function companyDailyStockInfo() {
     url: stockQueryUrl,
     method: "GET",
   }).then(function (response) {
-    // let lastRefreshed = response["Meta Data"]["3. Last Refreshed"]; // get latest date available
     $dateBtn.on("click", function () {
       console.log(response);
       let selectedDate = $dateSelected.val();
       console.log(selectedDate);
       let dailyView = response["Time Series (Daily)"];
 
-      // let latestInfo = dailyView[lastRefreshed];
-      // console.log(lastestInfo);
-
       $(
         `<div class="uk-card uk-card-default uk-margin">
       
-      <div class="uk-card-body">
+      <div id="cardDailyInfo" class="uk-card-body">
+      <p> Date: ${selectedDate}</p>
         <p>Open: $${parseInt(dailyView[selectedDate]["1. open"]).toFixed(2)}</p>
           <p>High: $${parseInt(
             dailyView[selectedDate]["2. high"]
