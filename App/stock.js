@@ -1,9 +1,9 @@
-let params = (new URL(document.location)).searchParams;
-let stockSelected = params.get('stock');
-let companyName = params.get('company');
+let params = new URL(document.location).searchParams;
+let stockSelected = params.get("stock");
+let companyName = params.get("company");
 
 today = moment().format("YYYY-MM-DD");
-yesterday = moment().subtract(1,"days").format("YYYY-MM-DD");
+yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
 
 let stockApiKey = "AIOFXIT69F29K1ID";
 let stockQueryUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${stockSelected}&apikey=${stockApiKey}`;
@@ -12,7 +12,8 @@ $.ajax({
   url: stockQueryUrl,
   method: "GET",
 }).then(function (response) {
-  let lastRefreshed = response["Meta Data"]["3. Last Refreshed"];// get latest date available
+  console.log(response);
+  let lastRefreshed = response["Meta Data"]["3. Last Refreshed"]; // get latest date available
   let dailyView = response["Time Series (Daily)"];
   let latestInfo = dailyView[lastRefreshed];
 
@@ -21,33 +22,23 @@ $.ajax({
         <h3 class="uk-card-title">${companyName} (${stockSelected})</h3>
       </div>
       <div class="uk-card-body">
-        <p>Open: $${parseInt(
-          latestInfo["1. open"]
-          ).toFixed(2)}</p>
-          <p>High: $${parseInt(
-            latestInfo["2. high"]
-          ).toFixed(2)}</p>
-          <p>Low: $${parseInt(
-            latestInfo["3. low"]
-          ).toFixed(2)}</p>
-          <p>Previous Close: $${parseInt(
-            latestInfo["4. close"]
-          ).toFixed(2)}</p>
-          <p>Volume: $${parseInt(
-            latestInfo["5. volume"]
-          ).toFixed()}</p>
+        <p>Open: $${parseInt(latestInfo["1. open"]).toFixed(2)}</p>
+          <p>High: $${parseInt(latestInfo["2. high"]).toFixed(2)}</p>
+          <p>Low: $${parseInt(latestInfo["3. low"]).toFixed(2)}</p>
+          <p>Previous Close: $${parseInt(latestInfo["4. close"]).toFixed(2)}</p>
+          <p>Volume: $${parseInt(latestInfo["5. volume"]).toFixed()}</p>
+          <button id="companyOverviewBtn" class="uk-button uk-button-default">Company Overview</button>
       </div>`).appendTo("#stockInfo");
 });
 
-
 let newsApiKey = "bslccuvrh5rb8ivkrml0";
-let newsQueryUrl = `https://finnhub.io/api/v1/company-news?symbol=${stockSelected}&from=${yesterday}&to=${today}&token=${newsApiKey}`
+let newsQueryUrl = `https://finnhub.io/api/v1/company-news?symbol=${stockSelected}&from=${yesterday}&to=${today}&token=${newsApiKey}`;
 
 $.ajax({
   url: newsQueryUrl,
   method: "GET",
 }).then(function (response) {
-  console.log(newsQueryUrl)
+  console.log(newsQueryUrl);
   console.log(response);
   for (let i = 0; i < response.length; i++) {
     const article = response[i];
@@ -64,3 +55,13 @@ $.ajax({
     </div>`).appendTo("#stockNews");
   }
 });
+
+$("#stockInfo").on("click", "#companyOverviewBtn", function () {
+  // let stockSelected = $(this).attr("data-symbol");
+  // let companyName = $(this).attr("data-name");
+  renderCompanyOverview(stockSelected, companyName);
+});
+
+function renderCompanyOverview(stockSelected, companyName) {
+  window.location.href = `./companyOverview.html?stock=${stockSelected}&company=${companyName}`;
+}
