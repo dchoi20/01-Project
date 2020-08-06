@@ -1,8 +1,7 @@
-.uk-grid{
-margin: 0;
-padding: 0;
-display: flex;
-  
+.uk-grid {
+  margin: 0;
+  padding: 0;
+  display: flex;
 }
 h1 {
   color: white;
@@ -19,10 +18,9 @@ button {
   text-align: center;
 }
 
-.uk-card{
+.uk-card {
   text-align: center;
   background-color: rgb(158, 157, 157);
-  
 }
 
 .uk-card-title {
@@ -34,10 +32,9 @@ p {
 }
 
 .uk-button {
-    color: black;
-    background-color: white;
+  color: black;
+  background-color: white;
 }
-
 
 .stockListItems:hover {
   cursor: pointer;
