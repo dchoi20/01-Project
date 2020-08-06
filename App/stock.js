@@ -57,8 +57,6 @@ $.ajax({
 });
 
 $("#stockInfo").on("click", "#companyOverviewBtn", function () {
-  // let stockSelected = $(this).attr("data-symbol");
-  // let companyName = $(this).attr("data-name");
   renderCompanyOverview(stockSelected, companyName);
 });
 
