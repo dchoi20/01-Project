@@ -12,13 +12,13 @@ WHEN I click on the business, I can see more information about the business
 ```
 ## Technologies
 
-Moment.js
-UiKit CSS Library
-jQuery
+* Moment.js
+* UiKit CSS Library
+* jQuery
 
 ## APIs
 
-Finnhub.io
-CurrentsApi
-AlphaVantage
+* Finnhub.io
+* CurrentsApi
+* AlphaVantage
 

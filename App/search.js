@@ -1,13 +1,5 @@
 let apiKey = "AIOFXIT69F29K1ID";
 
-//--------- TODAYS DATE --------------------
-let today = new Date();
-
-let dd = today.getDate();
-let mm = today.getMonth() + 1;
-let yyyy = today.getFullYear();
-let todayDate = yyyy + "-" + "0" + mm + "-" + "0" + dd;
-
 function searchSymbol() {
   event.preventDefault();
   let searchSymbol = $("#stockInput").val();
