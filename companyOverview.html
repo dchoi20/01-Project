@@ -6,25 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Company Overview</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/css/uikit.min.css" />
-
+    <link rel="stylesheet" href="./companyOverview.css">
 </head>
 
 <body>
 
-    <header id="companyName"></header>
+    <div class="uk-child-width-expand@s" uk-grid>
+        <div class="uk-grid-item-match">
+            <div id="companyName"></div>
+            <div id="companyInfo"></div>
+        </div>
+        <div>
+            <h3>Heading</h3>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat.
+            </p>
+        </div>
+    </div>
 
-    <main id="companyDescription"></main>
+
+    <header></header>
+
+    <div></div>
 
     <div id="companyDailyStockInfo">
-
-
         <form>
             <input id="dateSelected" type="date">
             <input id="dateBtn" type="button" value="date">
         </form>
     </div>
 
-    <div id="companyInfo"></div>
 
 
 
