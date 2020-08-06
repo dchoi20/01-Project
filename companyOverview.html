@@ -9,7 +9,31 @@
 </head>
 
 <body>
+    <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #transparent-sticky-navbar">
+        <nav class="uk-navbar-container" uk-navbar>
+            <div class="uk-navbar-right">
+    
+                <ul class="uk-navbar-nav">
+                    <li>
+                        <a href="./index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="./news.html">News</a>
+                    </li>
+                    <li>
+                        <a href="./search.html">Search</a>
+                    </li>
+                 </ul>
+    
+            </div>
+        </nav>
+    </div>
 
+
+    <form>
+        <input id="dateSelected" type="date">
+        <input id="dateBtn" type="button" value="date">
+    </form>
     <header id="companyName"></header>
 
     <main id="companyDescription"></main>
@@ -25,6 +49,8 @@
 
 
 
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/js/uikit-icons.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
