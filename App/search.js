@@ -11,6 +11,7 @@ let todayDate = yyyy + "-" + "0" + mm + "-" + "0" + dd;
 function searchSymbol() {
   event.preventDefault();
   let searchSymbol = $("#stockInput").val();
+  $("#searchResults").empty();  
 
   let queryURL =
     "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" +
