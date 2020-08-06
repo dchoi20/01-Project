@@ -1,6 +1,13 @@
 let $dateSelected = $("#dateSelected");
 let $dateBtn = $("#dateBtn");
 
+let today = new Date();
+
+let dd = today.getDate();
+let mm = today.getMonth() + 1;
+let yyyy = today.getFullYear();
+let todayDate = yyyy + "-" + "0" + mm + "-" + "0" + dd;
+
 params = new URL(document.location).searchParams;
 stockSelected = params.get("stock");
 
@@ -19,8 +26,7 @@ function companyDailyStockInfo() {
       let dailyView = response["Time Series (Daily)"];
 
       $(
-        `<div class="uk-card uk-card-default uk-margin">
-      
+        `<div class="uk-card uk-card-default uk-margin">     
       <div id="cardDailyInfo" class="uk-card-body">
       <p> Date: ${selectedDate}</p>
         <p>Open: $${parseInt(dailyView[selectedDate]["1. open"]).toFixed(2)}</p>
@@ -86,5 +92,30 @@ function companyInfo() {
     ).appendTo("#companyInfo");
   });
 }
-
 companyInfo();
+
+function currentDateInfo() {
+  let stockQueryUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${stockSelected}&apikey=${stockApiKey}`;
+
+  $.ajax({
+    url: stockQueryUrl,
+    method: "GET",
+  }).then(function (response) {
+    console.log(response);
+    lastRefreshed = response["Meta Data"]["3. Last Refreshed"]; // get latest date available
+    dailyView = response["Time Series (Daily)"];
+    latestInfo = dailyView[lastRefreshed];
+
+    $(`<div class="uk-card uk-card-default uk-margin">
+        <h4>${todayDate}</h4>
+        <div class="uk-card-body">
+          <p>Open: $${parseInt(latestInfo["1. open"]).toFixed(2)}</p>
+            <p>High: $${parseInt(latestInfo["2. high"]).toFixed(2)}</p>
+            <p>Low: $${parseInt(latestInfo["3. low"]).toFixed(2)}</p>
+            <p>Previous Close: $${parseInt(latestInfo["4. close"]).toFixed(
+              2
+            )}</p>
+        </div>`).appendTo("#currentDateStockInfo");
+  });
+}
+currentDateInfo();
