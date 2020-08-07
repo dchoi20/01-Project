@@ -5,14 +5,13 @@ let companyName = params.get("company");
 today = moment().format("YYYY-MM-DD");
 yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
 
-let stockApiKey = "6RBOJSEN5UCD8L5V";
+let stockApiKey = "1IFT5IFSPJP7RUK6";
 let stockQueryUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${stockSelected}&apikey=${stockApiKey}`;
 
 $.ajax({
   url: stockQueryUrl,
   method: "GET",
 }).then(function (response) {
-  console.log(response);
   let lastRefreshed = response["Meta Data"]["3. Last Refreshed"]; // get latest date available
   let dailyView = response["Time Series (Daily)"];
   let latestInfo = dailyView[lastRefreshed];
@@ -38,8 +37,6 @@ $.ajax({
   url: newsQueryUrl,
   method: "GET",
 }).then(function (response) {
-  console.log(newsQueryUrl);
-  console.log(response);
   for (let i = 0; i < response.length; i++) {
     const article = response[i];
     $(`<div class="uk-card uk-card-default uk-margin">
