@@ -11,7 +11,10 @@ let todayDate = yyyy + "-" + "0" + mm + "-" + "0" + dd;
 params = new URL(document.location).searchParams;
 stockSelected = params.get("stock");
 
-stockApiKey = "AIOFXIT69F29K1ID";
+stockApiKey = "6RBOJSEN5UCD8L5V";
+
+companyOverview();
+companyDailyStockInfo();
 
 function companyDailyStockInfo() {
   stockQueryUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${stockSelected}&apikey=${stockApiKey}`;
@@ -42,13 +45,13 @@ function companyDailyStockInfo() {
           ).toLocaleString()}</p>
       </div>`
       ).prependTo("#companyDailyStockInfo");
+      currentDateInfo(response);
     });
   });
 }
-companyDailyStockInfo();
 
 function companyOverview() {
-  let stockQueryUrl = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${stockSelected}&apikey=AIOFXIT69F29K1ID`;
+  let stockQueryUrl = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${stockSelected}&apikey=${stockApiKey}`;
 
   $.ajax({
     url: stockQueryUrl,
@@ -66,20 +69,20 @@ function companyOverview() {
       </div>
       `
     ).appendTo("#companyName");
+    companyInfo(response);
   });
 }
-companyOverview();
 
-function companyInfo() {
-  let stockQueryUrl = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${stockSelected}&apikey=AIOFXIT69F29K1ID`;
+function companyInfo(response) {
+  // let stockQueryUrl = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${stockSelected}&apikey=6RBOJSEN5UCD8L5V`;
 
-  $.ajax({
-    url: stockQueryUrl,
-    method: "GET",
-  }).then(function (response) {
-    console.log(response);
-    $(
-      `<div class="uk-card uk-card-default uk-margin">
+  // $.ajax({
+  //   url: stockQueryUrl,
+  //   method: "GET",
+  // }).then(function (response) {
+  // console.log(response);
+  $(
+    `<div class="uk-card uk-card-default uk-margin">
       <div class="uk-card-body">
         <p>Sector: ${response["Sector"]}</p>
         <p>Industry: ${response["Industry"]}</p>
@@ -89,24 +92,23 @@ function companyInfo() {
 
       </div>
       `
-    ).appendTo("#companyInfo");
-  });
+  ).appendTo("#companyInfo");
+  // });
 }
-companyInfo();
 
-function currentDateInfo() {
-  let stockQueryUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${stockSelected}&apikey=${stockApiKey}`;
+function currentDateInfo(response) {
+  // let stockQueryUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${stockSelected}&apikey=${stockApiKey}`;
 
-  $.ajax({
-    url: stockQueryUrl,
-    method: "GET",
-  }).then(function (response) {
-    console.log(response);
-    lastRefreshed = response["Meta Data"]["3. Last Refreshed"]; // get latest date available
-    dailyView = response["Time Series (Daily)"];
-    latestInfo = dailyView[lastRefreshed];
+  // $.ajax({
+  //   url: stockQueryUrl,
+  //   method: "GET",
+  // }).then(function (response) {
+  //   console.log(response);
+  lastRefreshed = response["Meta Data"]["3. Last Refreshed"]; // get latest date available
+  dailyView = response["Time Series (Daily)"];
+  latestInfo = dailyView[lastRefreshed];
 
-    $(`<div class="uk-card uk-card-default uk-margin">
+  $(`<div class="uk-card uk-card-default uk-margin">
     <div class="uk-card-header">
         <h3 class="uk-card-title">Current Day Stock Watch:</h3>
       </div>
@@ -118,6 +120,5 @@ function currentDateInfo() {
               2
             )}</p>
         </div>`).appendTo("#currentDateStockInfo");
-  });
+  // });
 }
-currentDateInfo();

@@ -5,7 +5,7 @@ let companyName = params.get("company");
 today = moment().format("YYYY-MM-DD");
 yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
 
-let stockApiKey = "AIOFXIT69F29K1ID";
+let stockApiKey = "6RBOJSEN5UCD8L5V";
 let stockQueryUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${stockSelected}&apikey=${stockApiKey}`;
 
 $.ajax({

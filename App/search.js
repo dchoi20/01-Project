@@ -1,9 +1,9 @@
-let apiKey = "AIOFXIT69F29K1ID";
+let apiKey = "6RBOJSEN5UCD8L5V";
 
 function searchSymbol() {
   event.preventDefault();
   let searchSymbol = $("#stockInput").val();
-  $("#searchResults").empty();  
+  $("#searchResults").empty();
 
   let queryURL =
     "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" +
@@ -35,4 +35,4 @@ $("#searchResults").on("click", ".stockListItems", function () {
 
 function renderStockPage(stockSelected, companyName) {
   window.location.href = `./stock.html?stock=${stockSelected}&company=${companyName}`;
-};
+}
