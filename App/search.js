@@ -1,4 +1,4 @@
-let apiKey = "6RBOJSEN5UCD8L5V";
+let apiKey = "HEIHLI5K0DJC1I2B";
 
 function searchSymbol() {
   event.preventDefault();
@@ -14,7 +14,6 @@ function searchSymbol() {
     url: queryURL,
     method: "GET",
   }).then(function (response) {
-    console.log(response.bestMatches);
     for (let i = 0; i < response.bestMatches.length; i++) {
       let stockBestMatches = response.bestMatches[i];
       let companyName = stockBestMatches["2. name"];

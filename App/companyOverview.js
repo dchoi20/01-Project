@@ -23,9 +23,7 @@ function companyDailyStockInfo() {
     method: "GET",
   }).then(function (response) {
     $dateBtn.on("click", function () {
-      console.log(response);
       let selectedDate = $dateSelected.val();
-      console.log(selectedDate);
       let dailyView = response["Time Series (Daily)"];
 
       $(
@@ -51,13 +49,12 @@ function companyDailyStockInfo() {
 }
 
 function companyOverview() {
-  let stockQueryUrl = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${stockSelected}&apikey=${stockApiKey}`;
+  let stockQueryUrl = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${stockSelected}&apikey=HEIHLI5K0DJC1I2B`;
 
   $.ajax({
     url: stockQueryUrl,
     method: "GET",
   }).then(function (response) {
-    console.log(response);
     $(
       `<div class="uk-card uk-card-default uk-margin">
       <div class="uk-card-header">
@@ -74,13 +71,6 @@ function companyOverview() {
 }
 
 function companyInfo(response) {
-  // let stockQueryUrl = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${stockSelected}&apikey=6RBOJSEN5UCD8L5V`;
-
-  // $.ajax({
-  //   url: stockQueryUrl,
-  //   method: "GET",
-  // }).then(function (response) {
-  // console.log(response);
   $(
     `<div class="uk-card uk-card-default uk-margin">
       <div class="uk-card-body">
@@ -93,18 +83,10 @@ function companyInfo(response) {
       </div>
       `
   ).appendTo("#companyInfo");
-  // });
 }
 
 function currentDateInfo(response) {
-  // let stockQueryUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${stockSelected}&apikey=${stockApiKey}`;
-
-  // $.ajax({
-  //   url: stockQueryUrl,
-  //   method: "GET",
-  // }).then(function (response) {
-  //   console.log(response);
-  lastRefreshed = response["Meta Data"]["3. Last Refreshed"]; // get latest date available
+  lastRefreshed = response["Meta Data"]["3. Last Refreshed"];
   dailyView = response["Time Series (Daily)"];
   latestInfo = dailyView[lastRefreshed];
 
@@ -120,5 +102,4 @@ function currentDateInfo(response) {
               2
             )}</p>
         </div>`).appendTo("#currentDateStockInfo");
-  // });
 }
